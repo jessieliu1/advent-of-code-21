@@ -20,7 +20,6 @@ def calculate_depth_vector_length_aim(filename):
         aim += change[2]
     return horizontal * depth
 
-
 # Return (horizontal change, depth change)
 def get_direction(dir):
     match dir[0]:
