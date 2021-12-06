@@ -1,12 +1,13 @@
 from util.util import file_to_string_list
 import sys
+import time
 
 def compute_power_consumption(filename):
     binary_list = file_to_string_list(filename)
     if len(binary_list) == 0:
         return 0
-    ints_by_position = [[] for i in range(len(list[position]))]
-    for num in list:
+    ints_by_position = [[] for i in range(len(binary_list[0]))]
+    for num in binary_list:
         for i in range(0, len(num)):
             ints_by_position[i].append(int(num[i]))
     sums = [sum(list_index) for list_index in ints_by_position]
@@ -38,4 +39,6 @@ def main():
     else:
         print(compute_power_consumption(sys.argv[1]))
 
+start_time = time.time()
 main()
+print("--- %s seconds ---" % (time.time() - start_time))
