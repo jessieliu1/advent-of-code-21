@@ -36,3 +36,18 @@ def file_to_bingo(filename):
       boards.append(current_board)
       file.close()
       return [bingo_numbers, boards]
+
+def file_to_vents(filename):
+    with open(filename, 'r') as file:
+      input_lines = [parse_vent(line.strip()) for line in file]
+      file.close()
+      return input_lines
+
+def parse_vent(line):
+    coords = line.split(' -> ')
+    coord_list = []
+    for coord in coords:
+        segment = coord.split(',')
+        int_segment = [int(x) for x in segment]
+        coord_list.append(tuple(int_segment))
+    return tuple(coord_list)
