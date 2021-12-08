@@ -6,6 +6,13 @@ def file_to_int_list(filename):
      file.close()
      return input_lines
 
+def csv_to_int_list(filename):
+   with open(filename, 'r') as file:
+     input_lines = file.readline().split(',')
+     input_lines = [int(x) for x in input_lines]
+     file.close()
+     return input_lines
+
 def file_to_tuple_list(filename):
     with open(filename, 'r') as file:
       input_lines = [tuple(line.strip().split()) for line in file]
