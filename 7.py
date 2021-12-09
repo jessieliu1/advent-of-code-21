@@ -1,6 +1,27 @@
 from util.util import csv_to_int_list
 import sys
+import statistics
+import math
 
+def min_fuel_pos_linear(filename):
+    positions = csv_to_int_list(filename)
+    median_position = statistics.median(positions)
+    distances = [int(abs(x - median_position)) for x in positions]
+    return sum(distances)
+
+def min_fuel_pos_nonlinear(filename):
+    positions = csv_to_int_list(filename)
+    mean_position = statistics.mean(positions)
+    mean_floor = math.floor(mean_position)
+    mean_ceil = math.ceil(mean_position)
+    distances_floor_sum = round(sum([sum_of_series(abs(x - mean_floor)) for x in positions]))
+    distances_ceil_sum = round(sum([sum_of_series(abs(x - mean_ceil)) for x in positions]))
+    return min(distances_ceil_sum, distances_floor_sum)
+
+def sum_of_series(n):
+    return (n * (n + 1)) / 2
+
+# initial part 1 answer
 def minimum_fuel_position(filename):
     positions = csv_to_int_list(filename)
     pos_dict = {}
@@ -35,10 +56,10 @@ def minimum_fuel_position(filename):
             min_position = i
     return min_fuel
 
-def gaussian_cost(n):
-    return ((n+1)*n)//2
-
 def main():
-    print(minimum_fuel_position(sys.argv[1]))
+    if (sys.argv[1] == "p1"):
+        print(min_fuel_pos_linear(sys.argv[2]))
+    else:
+        print(min_fuel_pos_nonlinear(sys.argv[1]))
 
 main()
