@@ -58,3 +58,18 @@ def parse_vent(line):
         int_segment = [int(x) for x in segment]
         coord_list.append(tuple(int_segment))
     return tuple(coord_list)
+
+def read_signal_patterns(filename):
+    with open(filename, 'r') as file:
+        input_lines = [parse_note(line.strip()) for line in file]
+        signal_patterns = []
+        output_digits = []
+        for line in input_lines:
+            signal_patterns.append(line[0].split(' '))
+            output_digits.append(line[1].split(' '))
+        file.close()
+        return (signal_patterns, output_digits)
+
+def parse_note(line):
+    note = line.split('|')
+    return (note[0].strip(), note[1].strip())
