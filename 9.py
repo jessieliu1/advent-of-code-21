@@ -1,9 +1,9 @@
-from util.util import file_to_heightmap
+from util.util import file_to_int_matrix
 import sys
 import math
 
 def sum_low_points(filename):
-    heightmap = file_to_heightmap(filename)
+    heightmap = file_to_int_matrix(filename)
     sum_low_points = 0
     for i in range(len(heightmap)):
         for j in range(len(heightmap[i])):
@@ -49,7 +49,7 @@ def find_low_points(heightmap):
 
 
 def product_basins(filename):
-    heightmap = file_to_heightmap(filename)
+    heightmap = file_to_int_matrix(filename)
     low_points = find_low_points(heightmap)
     basin_sizes = []
     for point in low_points:

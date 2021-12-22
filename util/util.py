@@ -74,7 +74,7 @@ def parse_note(line):
     note = line.split('|')
     return (note[0].strip(), note[1].strip())
 
-def file_to_heightmap(filename):
+def file_to_int_matrix(filename):
     with open(filename, 'r') as file:
         input_lines = [[int(char) for char in line.strip()] for line in file]
         file.close()
