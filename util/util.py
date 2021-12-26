@@ -79,3 +79,18 @@ def file_to_int_matrix(filename):
         input_lines = [[int(char) for char in line.strip()] for line in file]
         file.close()
         return input_lines
+
+def file_to_caves(filename):
+    with open(filename, 'r') as file:
+        adjacency = {}
+        for line in file:
+            line = line.strip()
+            nodes = line.split("-")
+            if nodes[0] not in adjacency:
+                adjacency[nodes[0]] = set()
+            adjacency[nodes[0]].add(nodes[1])
+            if nodes[1] not in adjacency:
+                adjacency[nodes[1]] = set()
+            adjacency[nodes[1]].add(nodes[0])
+        file.close()
+        return adjacency
