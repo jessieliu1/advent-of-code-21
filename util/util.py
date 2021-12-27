@@ -121,6 +121,19 @@ def read_manual_instructions(filename):
             dir, num = line.strip()[11:].split("=")
             instructions.append((dir, int(num)))
             line = file.readline()
+        file.close()
         return paper, instructions
 
+
+def read_polymer_input(filename):
+    with open(filename, 'r') as file:
+        template = file.readline().strip()
+        file.readline()
+        rules = {}
+        line = file.readline()
+        while line:
+            pair, insert = line.strip().split(" -> ")
+            rules[pair] = insert
+            line = file.readline()
         file.close()
+        return template, rules
