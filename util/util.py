@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 def file_to_int_list(filename):
    with open(filename, 'r') as file:
@@ -94,3 +95,32 @@ def file_to_caves(filename):
             adjacency[nodes[1]].add(nodes[0])
         file.close()
         return adjacency
+
+def read_manual_instructions(filename):
+    with open(filename, 'r') as file:
+        line = file.readline()
+        coords = []
+        instructions = []
+        max_x = 0
+        max_y = 0
+        while line.strip() != "":
+            y, x = line.strip().split(',')
+            coords.append((int(x), int(y)))
+            if int(x) > max_x:
+                max_x = int(x)
+            if int(y) > max_y:
+                max_y = int(y)
+            line = file.readline()
+
+        paper = np.zeros((max_x+1, max_y+1))
+        for coord in coords:
+            paper[coord[0]][coord[1]] = 1
+
+        line = file.readline()
+        while line:
+            dir, num = line.strip()[11:].split("=")
+            instructions.append((dir, int(num)))
+            line = file.readline()
+        return paper, instructions
+
+        file.close()
