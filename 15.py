@@ -3,6 +3,7 @@ from collections import defaultdict
 import heapq as heap
 import numpy as np
 import sys
+import time
 
 def lowest_risk_path_full(filename):
     grid = create_full_grid(file_to_int_matrix(filename))
@@ -62,4 +63,6 @@ def main():
     else:
         print(lowest_risk_path_full(sys.argv[1]))
 
+start_time = time.time()
 main()
+print("--- %s seconds ---" % (time.time() - start_time))
